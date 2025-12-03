@@ -3,24 +3,23 @@
 import { useEffect, useState } from "react";
 
 export default function HomeContent() {
-  const [scriptInfo, setScriptInfo] = useState<{
-    loaded: boolean;
-    loadedAt: string | null;
-  }>({ loaded: false, loadedAt: null });
+  const [osanoLoaded, setOsanoLoaded] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const checkScript = () => {
+    const checkOsano = () => {
       if (typeof window !== "undefined") {
-        setScriptInfo({
-          loaded: !!(window as any).__SCRIPT_LAYOUT__,
-          loadedAt: (window as any).__SCRIPT_LOADED_AT__ || null,
-        });
+        setOsanoLoaded(!!(window as any).Osano);
       }
     };
     
-    checkScript();
-    const timer = setTimeout(checkScript, 100);
-    return () => clearTimeout(timer);
+    // Check immediately and after delays (Osano may load async)
+    checkOsano();
+    const timer = setTimeout(checkOsano, 500);
+    const timer2 = setTimeout(checkOsano, 1500);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(timer2);
+    };
   }, []);
 
   return (
@@ -34,25 +33,24 @@ export default function HomeContent() {
       <div className="card">
         <h3 className="card-title">
           <span>📜</span>
-          Script Detection
+          Osano Script Detection
         </h3>
         <div className="demo-box">
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem" }}>
-            <span
-              className={`status-badge ${scriptInfo.loaded ? "status-success" : "status-pending"}`}
-            >
-              {scriptInfo.loaded ? "✓ Script Layout Active" : "⚡ No Script Layout"}
-            </span>
+            {osanoLoaded === null ? (
+              <span className="status-badge status-pending">⏳ Checking...</span>
+            ) : osanoLoaded ? (
+              <span className="status-badge status-success">✓ Osano Loaded</span>
+            ) : (
+              <span className="status-badge status-pending">⚡ No Osano</span>
+            )}
           </div>
-          {scriptInfo.loadedAt ? (
-            <p style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.5)", margin: 0 }}>
-              Script loaded at: <code>{scriptInfo.loadedAt}</code>
-            </p>
-          ) : (
-            <p style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.5)", margin: 0 }}>
-              <code>window.__SCRIPT_LAYOUT__</code> is not set (no custom script loaded)
-            </p>
-          )}
+          <p style={{ fontSize: "0.85rem", color: "rgba(255, 255, 255, 0.5)", margin: 0 }}>
+            {osanoLoaded 
+              ? <><code>window.Osano</code> is available</>
+              : <><code>window.Osano</code> is not set</>
+            }
+          </p>
         </div>
       </div>
 
