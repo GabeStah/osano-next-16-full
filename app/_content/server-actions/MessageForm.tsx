@@ -30,13 +30,17 @@ export default function MessageForm() {
     if (result.success) formRef.current?.reset();
   }
 
+  async function handleClear() {
+    await clearAllMessages();
+  }
+
   return (
     <div style={{ marginBottom: "1.5rem" }}>
       <form ref={formRef} action={handleSubmit} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.75rem" }}>
         <input type="text" name="message" placeholder="Type a message..." style={{ flex: 1 }} autoComplete="off" />
         <SubmitButton />
       </form>
-      <form action={clearAllMessages}>
+      <form action={handleClear}>
         <ClearButton />
       </form>
     </div>
