@@ -285,7 +285,7 @@ input:focus, textarea:focus {
 }
 
 .nav-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .nav-hint {
@@ -342,10 +342,10 @@ input:focus, textarea:focus {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 0.9rem;
+  padding: 0.4rem 0.75rem;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   border-radius: 6px;
   transition: all 0.2s ease;
   border-left: 2px solid transparent;
@@ -390,6 +390,32 @@ input:focus, textarea:focus {
   gap: 0.5rem;
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.github-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.github-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .nav-link:hover {
