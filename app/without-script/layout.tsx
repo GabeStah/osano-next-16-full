@@ -7,11 +7,11 @@ export default function WithoutScriptLayout({
 }) {
   return (
     <div className="app-layout">
-      <Navigation />
+      <Navigation layout="without-script" />
       <main className="main-content without-script-bg">
         <div className="layout-indicator without-script">
           <span className="indicator-icon">⚡</span>
-          <span className="indicator-text">Without Script Layout</span>
+          <span className="indicator-text">Without Osano Layout</span>
         </div>
         <div className="content-wrapper">
           {children}
