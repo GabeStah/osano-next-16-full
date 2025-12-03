@@ -26,8 +26,8 @@ export default function HomeContent() {
     <div>
       <h1>Test Suite Home</h1>
       <p style={{ color: "rgba(255, 255, 255, 0.7)", marginBottom: "2rem" }}>
-        Welcome to the Next.js 16 + React 19.2 feature test suite. 
-        Use the layout toggle above to switch between script and no-script layouts.
+        Welcome to the Osano Next.js 16 + React 19.2 feature test suite. 
+        Use the layout toggle to switch between Osano and no-Osano layouts.
       </p>
 
       <div className="card">
@@ -56,38 +56,54 @@ export default function HomeContent() {
 
       <div className="card">
         <h3 className="card-title">
-          <span>🧪</span>
-          Available Tests
+          <span>🔬</span>
+          How This Test Works
         </h3>
         <p className="card-description">
-          Explore React 19.2 and Next.js 16 features using the navigation sidebar:
+          This suite tests whether the Osano cookie consent script interferes with React hydration and client-side navigation.
         </p>
         <ul style={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.8 }}>
-          <li><strong>use() Hook</strong> - React 19's promise-based data fetching</li>
-          <li><strong>useActionState</strong> - Form state with Server Actions</li>
-          <li><strong>useOptimistic</strong> - Instant optimistic UI updates</li>
-          <li><strong>Server Actions</strong> - Direct server function calls</li>
-          <li><strong>Suspense</strong> - Streaming with fallback UI</li>
-          <li><strong>Streaming SSR</strong> - Progressive page rendering</li>
-          <li><strong>useFormStatus</strong> - Form submission state</li>
-          <li><strong>Transitions</strong> - Concurrent rendering features</li>
+          <li><strong>With Osano layout</strong> — Loads the Osano script via <code>NEXT_PUBLIC_COOKIE_SCRIPT</code></li>
+          <li><strong>Without Osano layout</strong> — No external scripts, baseline comparison</li>
+          <li><strong>⚡ Client Navigation</strong> — Uses Next.js <code>&lt;Link&gt;</code>, requires React hydration</li>
+          <li><strong>🔗 Full Page Navigation</strong> — Uses plain <code>&lt;a&gt;</code> tags, always works</li>
         </ul>
       </div>
 
       <div className="card">
         <h3 className="card-title">
-          <span>💡</span>
-          Next.js DevTools
+          <span>👀</span>
+          What to Expect
         </h3>
-        <p className="card-description">
-          Click the floating button to open Next.js DevTools.
+        <p className="card-description" style={{ marginBottom: "1rem" }}>
+          If Osano interferes with hydration:
+        </p>
+        <ul style={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.8, marginBottom: "1rem" }}>
+          <li><strong>⚡ Client Navigation links will fail</strong> — clicking does nothing (RSC fetches succeed but hydration breaks)</li>
+          <li><strong>🔗 Full Page Navigation links will work</strong> — standard browser navigation bypasses React</li>
+          <li><strong>Client Components may not render</strong> — interactive elements won't respond</li>
+        </ul>
+        <p className="card-description" style={{ marginBottom: "1rem" }}>
+          Without Osano (or if Osano is compatible):
         </p>
         <ul style={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.8 }}>
-          <li>Server vs Client Component rendering</li>
-          <li>Hydration performance</li>
-          <li>Route transitions</li>
-          <li>Script loading behavior</li>
+          <li><strong>Both navigation types work</strong> — Client nav is faster (no full reload)</li>
+          <li><strong>All interactive demos function</strong> — forms, optimistic updates, transitions</li>
         </ul>
+      </div>
+
+      <div className="card">
+        <h3 className="card-title">
+          <span>🛠️</span>
+          Testing Steps
+        </h3>
+        <ol style={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 2, paddingLeft: "1.25rem" }}>
+          <li>Start in the <strong>📜 Osano</strong> layout (check that Osano is detected above)</li>
+          <li>Click any <strong>⚡ Client Navigation</strong> link in the sidebar</li>
+          <li>If it fails, try the same page via <strong>🔗 Full Page Navigation</strong></li>
+          <li>Switch to the <strong>⚡ No Osano</strong> layout and repeat</li>
+          <li>Compare behavior — if Client Nav works without Osano but not with, the script may be the cause</li>
+        </ol>
       </div>
     </div>
   );
