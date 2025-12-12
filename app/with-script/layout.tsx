@@ -8,10 +8,10 @@ export default function WithScriptLayout({
 }) {
   return (
     <>
-      {!!process.env.NEXT_PUBLIC_COOKIE_SCRIPT && (
+      {!!process.env.NEXT_PUBLIC_COOKIE_SCRIPT_TEST && (
         <Script
           id="cookie-banner"
-          src={process.env.NEXT_PUBLIC_COOKIE_SCRIPT}
+          src={process.env. NEXT_PUBLIC_COOKIE_SCRIPT_TEST}
         />
       )}
       {/* Custom Script - demonstrates Next.js Script component */}
